@@ -45,7 +45,7 @@ export default function App() {
         </div>
       
         </div>
-        <SideBarHeader coin={"ETHUSDT"}/>
+        <SideBarHeader coin={"BTCUSDT"}/>
         </div>
     </div>
     

@@ -36,7 +36,8 @@ export const Chart = ({widthPercent=1, height=300,
       // let name = prompt('Enter merchant name');
       // let email = prompt('Enter merchant email');
       let money = trader.omoney()
-      fetch('http://localhost:3002/add', {
+      console.log(money);
+      fetch('http://localhost:3001/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
