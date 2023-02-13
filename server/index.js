@@ -12,16 +12,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-// app.get('/', (req, res) => {
-//   merchant_model.getMerchants()
-//   .then(response => {
-//     res.status(200).send(response);
-//   })
-//   .catch(error => {
-//     res.status(500).send(error);
-//   })
-// })
-
 app.post('/add', (req, res) => {
   merchant_model.addData(req.body)
   .then(response => {
