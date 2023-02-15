@@ -9,12 +9,20 @@ export const Chart = ({widthPercent=1, height=300,
     currency = "USD",
     chvlWidth = 8, chvlColor = "#C3BCDB44", chvlbgColor="#9B7DFF",
     chhlColor="#9B7DFF", chhlbgColor="#9B7DFF", trader}) => {
-	const chartContainerRef = useRef();
+	  const chartContainerRef = useRef();
     const socket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@trade")
+
     const points = []
+    const pointsLength = 100;
+
     var timeIndex = 0
+
     const candleList = []
-    const markers = []
+    const candelListLength = 30
+
+    const markers = []  
+    const markersLength = 5 
+
     const prevCandle = {time: 0, open:0, close: 0, high: 0, low:0}
     const candle = {time: 0, open:0, close: 0, high: 0, low:0}
     var entry = 0
@@ -26,15 +34,18 @@ export const Chart = ({widthPercent=1, height=300,
     var EMA26 = 0
 
     const MACD = []
+    const macdLength = 10
+
     var prevMACD = 0
+
     const delta = []
+    const deltaLength = 5 
+
     var aMACD = 0
 
     const ind = new Indicators();
     
     function storeData() {
-      // let name = prompt('Enter merchant name');
-      // let email = prompt('Enter merchant email');
       let money = trader.omoney()
       console.log(money);
       fetch('http://localhost:3001/add', {
@@ -44,14 +55,6 @@ export const Chart = ({widthPercent=1, height=300,
         },
         body: JSON.stringify({candle, money}),
       })
-        // .then(response => {
-        //   alert(response.text());
-        //   return response.text();
-        // })
-        // .then(data => {
-        //   alert(data);
-        //   getMerchant();
-        // });
     }
     function findTime(time) {
         return Math.floor((time)/1000)
@@ -76,11 +79,6 @@ export const Chart = ({widthPercent=1, height=300,
     }
     function update(){
       createNormalCandle()
-      // if (points.length > 1 && points[points.length-1].t > points[timeIndex].t && candle.time != 0){
-   
-      //   buy()
-      // }
-
     }
     function createHeikinCandle(){
         var high = 0
@@ -138,7 +136,7 @@ export const Chart = ({widthPercent=1, height=300,
             prevCandle.open = candle.open
             prevCandle.time = candle.time
             prevCandle.close = candle.close
-            prevCandle.high = candle.high
+            prevCandlef.high = candle.high
             prevCandle.low = candle.low
             storeData()
             buy()
